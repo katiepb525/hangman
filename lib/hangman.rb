@@ -18,9 +18,25 @@ end
 
 # create instance of new game
 class NewGame
+  attr_accessor :incorrect_guesses_left
+  attr_reader :answer
+
   def initalize
     @incorrect_guesses_left = 10
-    @answer = ''
+    @answer = 'corndog'
+  end
+
+  def display_blank(answer)
+    blank_letters = ''
+    answer.length.times do |i|
+      blank_letters += '_'
+    end
+
+  end
+
+  def play_round(player_input)
+    p "Incorrect guesses remaining: #{@incorrect_guesses_left}"
+
   end
 end
 
