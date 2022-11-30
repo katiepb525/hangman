@@ -7,17 +7,13 @@ end
 
 class Player
   include CheckInput
-  attr_reader :user_input
+  attr_accessor :user_input
 
   def initalize
     @user_input = ''
   end
-
-  def get_user_input
-    @user_input = gets.chomp
-  end
 end
 
 player = Player.new
-player.get_user_input
+player.user_input = gets.chomp
 p player.input_ok?(player.user_input)
