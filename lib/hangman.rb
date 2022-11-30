@@ -1,4 +1,3 @@
-
 # check for valid input
 module CheckInput
   # check input contains only uppercase or lowercase letters, and is only 1chr long
@@ -17,7 +16,13 @@ class Player
   end
 end
 
-
+# create instance of new game
+class NewGame
+  def initalize
+    @incorrect_guesses_left = 10
+    @answer = ''
+  end
+end
 
 player = Player.new
 player.user_input = gets.chomp
