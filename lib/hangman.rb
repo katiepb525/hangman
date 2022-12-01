@@ -1,12 +1,13 @@
 # frozen-string-literal: true
 
+require 'pry-byebug'
+
 # create instance of new game
 class NewGame
   attr_accessor :incorrect_guesses_left, :user_input
   attr_reader :word
 
   def initialize
-    @user_input = ''
     @incorrect_guesses_left = 10
     @word = 'corndog'
     @attempted_guesses = []
@@ -18,10 +19,13 @@ class NewGame
 
   # get user input
   def ask_user
-    until input_ok?(@user_input)
+    input = ''
+    until input_ok?(input) == true && already_guessed?(input, @attempted_guesses) == false
+      p "youve already guessed the letter #{input}." if already_guessed?(input, @attempted_guesses) == true
       p 'enter your guess: '
-      @user_input = gets.chomp
+      input = gets.chomp
     end
+    input
   end
 
   # check if current guess was already guessed
@@ -88,16 +92,14 @@ class NewGame
   def play_game
     until @incorrect_guesses_left.zero?
 
-      ask_user
-
-      play_round(@user_input)
+      input = ask_user
+      play_round(input)
 
       if player_won?(@blank_word, @word)
         p 'you win!'
         return
       end
 
-      @user_input = ''
     end
     p 'guess you lost :('
   end
