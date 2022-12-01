@@ -18,6 +18,9 @@ class NewGame
   #### input management ####
 
   # get user input
+
+  private
+
   def ask_user
     input = ''
     until input_ok?(input) == true && already_guessed?(input, @attempted_guesses) == false
@@ -29,6 +32,7 @@ class NewGame
   end
 
   # check if current guess was already guessed
+
   def already_guessed?(input, attempted_guesses)
     attempted_guesses.length.times do |i|
       return true if input == attempted_guesses[i]
@@ -44,6 +48,7 @@ class NewGame
   #### blank management ####
 
   # create blank 'word' based on how many chars answer has
+
   def generate_blank(answer)
     blank_letters = ''
     answer.length.times do
@@ -53,6 +58,7 @@ class NewGame
   end
 
   # update blank 'word' based on matches with user input'
+
   def update_blank(blank, answer, user_input)
     answer.length.times do |i|
       blank[i] = answer[i] if user_input == answer[i]
@@ -99,7 +105,6 @@ class NewGame
         p 'you win!'
         return
       end
-
     end
     p 'guess you lost :('
   end
