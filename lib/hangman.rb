@@ -77,12 +77,29 @@ class NewGame
 
     p @blank_word
   end
+
+  def player_won?(blank, answer)
+    blank == answer
+  end
+
+  def play_game
+    until @incorrect_guesses_left.zero?
+
+      @player.ask_user
+
+      play_round(@player.user_input)
+
+      if player_won?(@blank_word, @word)
+        p 'you win!'
+        return
+      end
+
+      @player.user_input = ''
+    end
+    p 'guess you lost :('
+  end
 end
 
 new_game = NewGame.new
 player = Player.new
-until player.input_ok?(player.user_input)
-  p 'enter your guess:'
-  player.user_input = gets.chomp
-end
-new_game.play_round(player.user_input)
+new_game.play_game
