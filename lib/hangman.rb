@@ -29,6 +29,8 @@ class NewGame
   attr_reader :word
 
   def initialize
+    @player = Player.new
+
     @incorrect_guesses_left = 10
     @word = 'corndog'
     @attempted_guesses = []
