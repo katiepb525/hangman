@@ -24,6 +24,8 @@ class NewGame
   def initialize
     @incorrect_guesses_left = 10
     @word = 'corndog'
+    @attempted_guesses = []
+    @blank_word = nil
   end
 
   def display_blank(answer)
