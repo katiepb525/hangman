@@ -51,11 +51,12 @@ class NewGame
     end
   end
 
-  def already_guessed?(user_input, previous_guesses)
-    previous_guesses.length.times do |i|
-      return true if user_input == previous_guesses[i]
-    end
-  end
+  # def already_guessed?(user_input, previous_guesses)
+  #   previous_guesses.length.times do |i|
+  #     return true if user_input == previous_guesses[i]
+  #   end
+  #   false
+  # end
 
   def play_round(user_input)
     @attempted_guesses.push(user_input)
