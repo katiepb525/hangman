@@ -14,6 +14,13 @@ class Player
   def initialize
     @user_input = ''
   end
+
+  def ask_user
+    until input_ok?(@user_input)
+      p 'enter your guess: '
+      @user_input = gets.chomp
+    end
+  end
 end
 
 # create instance of new game
