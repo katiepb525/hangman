@@ -103,4 +103,4 @@ class NewGame
   end
 end
 
-new_game = NewGame.new
+NewGame.new
