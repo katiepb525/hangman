@@ -36,12 +36,43 @@ class NewGame
     blank_letters
   end
 
-  def play_round(_player_input)
-    p "Incorrect guesses remaining: #{@incorrect_guesses_left}"
+  def update_blank(blank, answer, user_input)
+    answer.length.times do |i|
+      blank[i] = answer[i] if user_input == answer[i]
+    end
+  end
 
+  def already_guessed?(user_input, previous_guesses)
+    previous_guesses.length.times do |i|
+      return true if user_input == previous_guesses[i]
+    end
+  end
+
+  def play_round(user_input)
+    @attempted_guesses.push(user_input)
+
+    @blank_word = generate_blank(@word) if @blank_word.nil?
+
+    former_blank = @blank_word.clone
+
+    update_blank(@blank_word, @word, user_input)
+
+    if former_blank == @blank_word
+      @incorrect_guesses_left -= 1
+      p 'oops! wrong guess..'
+    end
+
+    p "you have #{@incorrect_guesses_left} guesses left."
+    puts "previously tried guesses: #{@attempted_guesses}"
+
+    p @blank_word
   end
 end
 
+new_game = NewGame.new
 player = Player.new
-player.user_input = gets.chomp
-p player.input_ok?(player.user_input)
+until player.input_ok?(player.user_input)
+  p 'enter your guess:'
+  player.user_input = gets.chomp
+end
+new_game.play_round(player.user_input)
