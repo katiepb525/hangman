@@ -1,18 +1,15 @@
-# check for valid input
-module CheckInput
-  # check input contains only uppercase or lowercase letters, and is only 1chr long
-  def input_ok?(input)
-    input.length == 1 && (input.count('^A-Z').zero? || input.count('^a-z').zero?)
-  end
-end
-
-# create instance of player
-class Player
-  include CheckInput
-  attr_accessor :user_input
+# create instance of new game
+class NewGame
+  attr_accessor :incorrect_guesses_left, :user_input
+  attr_reader :word
 
   def initialize
     @user_input = ''
+    @incorrect_guesses_left = 10
+    @word = 'corndog'
+    @attempted_guesses = []
+    @blank_word = nil
+    play_game
   end
 
   def ask_user
@@ -21,20 +18,10 @@ class Player
       @user_input = gets.chomp
     end
   end
-end
 
-# create instance of new game
-class NewGame
-  attr_accessor :incorrect_guesses_left
-  attr_reader :word
-
-  def initialize
-    @player = Player.new
-
-    @incorrect_guesses_left = 10
-    @word = 'corndog'
-    @attempted_guesses = []
-    @blank_word = nil
+  # check input contains only uppercase or lowercase letters, and is only 1chr long
+  def input_ok?(input)
+    input.length == 1 && (input.count('^A-Z').zero? || input.count('^a-z').zero?)
   end
 
   def generate_blank(answer)
