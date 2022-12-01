@@ -29,12 +29,12 @@ class NewGame
   end
 
   # check if current guess was already guessed
-  # def already_guessed?(user_input, previous_guesses)
-  #   previous_guesses.length.times do |i|
-  #     return true if user_input == previous_guesses[i]
-  #   end
-  #   false
-  # end
+  def already_guessed?(input, attempted_guesses)
+    attempted_guesses.length.times do |i|
+      return true if input == attempted_guesses[i]
+    end
+    false
+  end
 
   # check input contains only uppercase or lowercase letters, and is only 1chr long
   def input_ok?(input)
