@@ -1,3 +1,5 @@
+# frozen-string-literal: true
+
 # create instance of new game
 class NewGame
   attr_accessor :incorrect_guesses_left, :user_input
@@ -12,6 +14,9 @@ class NewGame
     play_game
   end
 
+  #### input management ####
+
+  # get user input
   def ask_user
     until input_ok?(@user_input)
       p 'enter your guess: '
@@ -19,11 +24,22 @@ class NewGame
     end
   end
 
+  # check if current guess was already guessed
+  # def already_guessed?(user_input, previous_guesses)
+  #   previous_guesses.length.times do |i|
+  #     return true if user_input == previous_guesses[i]
+  #   end
+  #   false
+  # end
+
   # check input contains only uppercase or lowercase letters, and is only 1chr long
   def input_ok?(input)
     input.length == 1 && (input.count('^A-Z').zero? || input.count('^a-z').zero?)
   end
 
+  #### blank management ####
+
+  # create blank 'word' based on how many chars answer has
   def generate_blank(answer)
     blank_letters = ''
     answer.length.times do
@@ -32,18 +48,22 @@ class NewGame
     blank_letters
   end
 
+  # update blank 'word' based on matches with user input'
   def update_blank(blank, answer, user_input)
     answer.length.times do |i|
       blank[i] = answer[i] if user_input == answer[i]
     end
   end
 
-  # def already_guessed?(user_input, previous_guesses)
-  #   previous_guesses.length.times do |i|
-  #     return true if user_input == previous_guesses[i]
-  #   end
-  #   false
-  # end
+  #### round/game management ####
+
+  # check for winning condition
+
+  def player_won?(blank, answer)
+    blank == answer
+  end
+
+  # play a single round of hangman
 
   def play_round(user_input)
     @attempted_guesses.push(user_input)
@@ -63,10 +83,6 @@ class NewGame
     puts "previously tried guesses: #{@attempted_guesses}"
 
     p @blank_word
-  end
-
-  def player_won?(blank, answer)
-    blank == answer
   end
 
   def play_game
