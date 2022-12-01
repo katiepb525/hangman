@@ -11,7 +11,7 @@ class Player
   include CheckInput
   attr_accessor :user_input
 
-  def initalize
+  def initialize
     @user_input = ''
   end
 end
@@ -21,7 +21,7 @@ class NewGame
   attr_accessor :incorrect_guesses_left
   attr_reader :answer
 
-  def initalize
+  def initialize
     @incorrect_guesses_left = 10
     @answer = 'corndog'
   end
