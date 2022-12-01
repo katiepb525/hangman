@@ -4,15 +4,24 @@ require 'pry-byebug'
 
 # create instance of new game
 class NewGame
-  attr_accessor :incorrect_guesses_left, :user_input
+  attr_accessor :incorrect_guesses_left
   attr_reader :word
 
   def initialize
     @incorrect_guesses_left = 10
-    @word = 'corndog'
+    @word = rand_word
     @attempted_guesses = []
     @blank_word = nil
     play_game
+  end
+
+  #### grab random word from dictionary ####
+
+  def rand_word
+    # grab dictionary file
+    dictionary = File.readlines('dictionary.txt')
+    # grab a random line
+    dictionary[rand(dictionary.length)].strip
   end
 
   #### input management ####
