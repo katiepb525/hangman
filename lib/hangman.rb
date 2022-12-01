@@ -19,11 +19,11 @@ end
 # create instance of new game
 class NewGame
   attr_accessor :incorrect_guesses_left
-  attr_reader :answer
+  attr_reader :word
 
   def initialize
     @incorrect_guesses_left = 10
-    @answer = 'corndog'
+    @word = 'corndog'
   end
 
   def display_blank(answer)
