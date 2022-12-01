@@ -28,7 +28,7 @@ class NewGame
     @blank_word = nil
   end
 
-  def display_blank(answer)
+  def generate_blank(answer)
     blank_letters = ''
     answer.length.times do
       blank_letters += '_'
