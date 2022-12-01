@@ -28,13 +28,13 @@ class NewGame
 
   def display_blank(answer)
     blank_letters = ''
-    answer.length.times do |i|
+    answer.length.times do
       blank_letters += '_'
     end
-
+    blank_letters
   end
 
-  def play_round(player_input)
+  def play_round(_player_input)
     p "Incorrect guesses remaining: #{@incorrect_guesses_left}"
 
   end
