@@ -12,7 +12,7 @@ class NewGame
     @word = rand_word
     @attempted_guesses = []
     @blank_word = nil
-    play_game
+    ask_load_or_new
   end
 
   #### grab random word from dictionary ####
@@ -30,8 +30,28 @@ class NewGame
 
   private
 
-  def ask_user
+  def ask_load_or_new
     input = ''
+    until %w[L N].include?(input)
+      p "press 'L' to load a saved game.\n press 'N' to start a new game."
+      input = gets.chomp
+      if input == 'L'
+        # load_game
+      elsif input == 'N'
+        play_game
+      end
+    end
+  end
+
+  # def load_game
+
+  # end
+
+  # def save_game
+
+  # end
+
+  def get_valid_char(input)
     until input_ok?(input) == true && already_guessed?(input, @attempted_guesses) == false
       p "youve already guessed the letter #{input}." if already_guessed?(input, @attempted_guesses) == true
       p 'enter your guess: '
@@ -105,10 +125,20 @@ class NewGame
   end
 
   def play_game
+    input = ''
     until @incorrect_guesses_left.zero?
+      if input == 'save'
+        p 'game saved!'
+      elsif input == 'exit'
+        p 'thanks for playing!'
+        return
+      else
+        valid_input = get_valid_char(input)
+        play_round(valid_input)
+        p "type \'save\' to save at any time. type \'exit\' to exit\n at anytime."
 
-      input = ask_user
-      play_round(input)
+        input = gets.chomp
+      end
 
       if player_won?(@blank_word, @word)
         p 'you win!'
