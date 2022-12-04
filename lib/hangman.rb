@@ -117,45 +117,39 @@ class NewGame
   def play_round(user_input)
     @attempted_guesses.push(user_input)
 
-    @blank_word = generate_blank(@word) if @blank_word.nil?
-
     former_blank = @blank_word.clone
 
     update_blank(@blank_word, @word, user_input)
 
-    if former_blank == @blank_word
-      @incorrect_guesses_left -= 1
-      p 'oops! wrong guess..'
-    end
+    return unless former_blank == @blank_word
 
-    p "you have #{@incorrect_guesses_left} guesses left."
-    puts "previously tried guesses: #{@attempted_guesses}"
-
-    p @blank_word
+    @incorrect_guesses_left -= 1
+    p 'oops! wrong guess..'
   end
 
   def play_game
     input = ''
     until @incorrect_guesses_left.zero?
+      display_round_info(@blank_word, @incorrect_guesses_left, @attempted_guesses)
+      input = gets.chomp
       if input == 'save'
-        p 'game saved!'
+        puts 'game saved!'
+        # error, will loop and never prompt for guess...
       elsif input == 'exit'
-        p 'thanks for playing!'
+        # we want to trigger this loop somehow...
+        puts 'goodbye!'
         return
       else
         valid_input = get_valid_char(input)
         play_round(valid_input)
-        p "type \'save\' to save at any time. type \'exit\' to exit\n at anytime."
-
-        input = gets.chomp
       end
 
       if player_won?(@blank_word, @word)
-        p 'you win!'
+        puts 'you win!'
         return
       end
     end
-    p 'guess you lost :('
+    puts 'guess you lost :('
   end
 end
 
