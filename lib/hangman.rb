@@ -91,9 +91,14 @@ class NewGame
     end
   end
 
-  # def load_game
-
-  # end
+  # load the most recent save (to implement multiple saves later..)
+  def load_game
+    save = YAML.load(File.read("#{directory}#{file_name}"))
+    @incorrect_guesses_left = save['incorrect_guesses_left']
+    @word = save['word']
+    @attempted_guesses = save['attempted_guesses']
+    @blank_word = save['blank_word']
+  end
 
   def to_yaml
     YAML.dump({
