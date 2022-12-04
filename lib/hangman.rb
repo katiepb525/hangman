@@ -91,7 +91,7 @@ class NewGame
     end
   end
 
-  # load the most recent save (to implement multiple saves later..)
+  # load saved values into game
   def deserialize
     save = YAML.load(File.read("#{directory}#{file_name}"))
     @incorrect_guesses_left = save['incorrect_guesses_left']
