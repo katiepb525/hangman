@@ -2,8 +2,18 @@
 
 require 'pry-byebug'
 
+module Display
+  def display_round_info(blank, incorrect_guesses_left, attempted_guesses)
+    puts "#{blank}"
+    puts "you have #{incorrect_guesses_left} guesses left."
+    puts "previously tried guesses: #{attempted_guesses}"
+    puts "type \'save\' to save at any time. type \'exit\' to exit\n at anytime."
+  end
+end
+
 # create instance of new game
 class NewGame
+  include Display
   attr_accessor :incorrect_guesses_left
   attr_reader :word
 
