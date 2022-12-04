@@ -1,6 +1,7 @@
 # frozen-string-literal: true
 
 require 'pry-byebug'
+require 'yaml'
 
 module Display
   def display_round_info(blank, incorrect_guesses_left, attempted_guesses)
@@ -89,9 +90,7 @@ class NewGame
 
   # end
 
-  # def save_game
-
-  # end
+  def save_game; end
 
   def get_valid_char(input)
     until input_ok?(input) == true && already_guessed?(input, @attempted_guesses) == false
@@ -167,6 +166,8 @@ class NewGame
       input = gets.chomp
       if input == 'save'
         display_save
+        # save_game
+        # exit_or_continue?
         return
       elsif input == 'exit'
         display_exit
