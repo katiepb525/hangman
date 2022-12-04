@@ -147,11 +147,11 @@ class NewGame
   # play a single round of hangman
 
   def play_round(user_input)
-    @attempted_guesses.push(user_input)
+    @attempted_guesses.push(user_input.downcase)
 
     former_blank = @blank_word.clone
 
-    update_blank(@blank_word, @word, user_input)
+    update_blank(@blank_word, @word, user_input.downcase)
 
     return unless former_blank == @blank_word
 
