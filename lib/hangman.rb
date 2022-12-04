@@ -3,9 +3,10 @@
 require 'pry-byebug'
 require 'yaml'
 
+# all methods that print a string
 module Display
   def display_round_info(blank, incorrect_guesses_left, attempted_guesses)
-    puts "#{blank}"
+    puts blank.to_s
     puts "you have #{incorrect_guesses_left} guesses left."
     puts "previously tried guesses: #{attempted_guesses}"
     puts "type \'save\' to save at any time. type \'exit\' to exit\n at anytime."
