@@ -21,7 +21,7 @@ class NewGame
     @incorrect_guesses_left = 10
     @word = rand_word
     @attempted_guesses = []
-    @blank_word = nil
+    @blank_word = generate_blank(@word)
     ask_load_or_new
   end
 
