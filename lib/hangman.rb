@@ -110,8 +110,6 @@ class NewGame
   end
 
   def save_game
-    directory = 'saved_games/'
-    file_name = 'save_test.yml'
     # save yaml file to directory
     File.open("#{directory}#{file_name}", 'w') { |file| file.write(to_yaml) }
   end
