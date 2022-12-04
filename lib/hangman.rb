@@ -91,7 +91,21 @@ class NewGame
 
   # end
 
-  def save_game; end
+  def to_yaml
+    YAML.dump({
+                incorrect_guesses_left: @incorrect_guesses_left,
+                word: @word,
+                attempted_guesses: @attempted_guesses,
+                blank_word: @blank_word
+              })
+  end
+
+  def save_game
+    directory = 'saved_games/'
+    file_name = 'save_test.yml'
+    # save yaml file to directory
+    File.open("#{directory}#{file_name}", 'w') { |file| file.write(to_yaml) }
+  end
 
   def get_valid_char(input)
     until input_ok?(input) == true && already_guessed?(input, @attempted_guesses) == false
@@ -167,7 +181,7 @@ class NewGame
       input = gets.chomp
       if input == 'save'
         display_save
-        # save_game
+        save_game
         # exit_or_continue?
         return
       elsif input == 'exit'
