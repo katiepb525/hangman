@@ -52,8 +52,8 @@ class NewGame
   attr_reader :word
 
   # save game directory/filename
-  directory = 'saved_games/'
-  file_name = 'save_test.yml'
+  @@directory = 'saved_games/'
+  @@file_name = 'save_test.yml'
 
   def initialize
     @incorrect_guesses_left = 10
@@ -111,7 +111,7 @@ class NewGame
 
   def save_game
     # save yaml file to directory
-    File.open("#{directory}#{file_name}", 'w') { |file| file.write(to_yaml) }
+    File.open("#{@@directory}#{@@file_name}", 'w') { |file| file.write(to_yaml) }
   end
 
   def get_valid_char(input)
