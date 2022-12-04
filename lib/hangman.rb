@@ -51,6 +51,10 @@ class NewGame
   attr_accessor :incorrect_guesses_left
   attr_reader :word
 
+  # save game directory/filename
+  directory = 'saved_games/'
+  file_name = 'save_test.yml'
+
   def initialize
     @incorrect_guesses_left = 10
     @word = rand_word
