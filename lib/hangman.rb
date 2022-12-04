@@ -9,6 +9,38 @@ module Display
     puts "previously tried guesses: #{attempted_guesses}"
     puts "type \'save\' to save at any time. type \'exit\' to exit\n at anytime."
   end
+
+  def display_new_or_load_prompt
+    puts "press 'L' to load a saved game.\n press 'N' to start a new game."
+  end
+
+  def display_win
+    puts 'you win!'
+  end
+
+  def display_lose
+    puts 'you lose :('
+  end
+
+  def display_exit
+    puts 'bye!'
+  end
+
+  def display_save
+    puts 'game saved!'
+  end
+
+  def display_guess_prompt
+    puts 'enter your guess:'
+  end
+
+  def display_guess_again_prompt(input)
+    puts "youve already guessed the letter #{input}."
+  end
+
+  def display_wrong_guess
+    puts 'oops! wrong guess..'
+  end
 end
 
 # create instance of new game
@@ -43,7 +75,7 @@ class NewGame
   def ask_load_or_new
     input = ''
     until %w[L N].include?(input)
-      p "press 'L' to load a saved game.\n press 'N' to start a new game."
+      display_new_or_load_prompt
       input = gets.chomp
       if input == 'L'
         # load_game
@@ -63,8 +95,8 @@ class NewGame
 
   def get_valid_char(input)
     until input_ok?(input) == true && already_guessed?(input, @attempted_guesses) == false
-      p "youve already guessed the letter #{input}." if already_guessed?(input, @attempted_guesses) == true
-      p 'enter your guess: '
+      display_guess_again_prompt(input) if already_guessed?(input, @attempted_guesses) == true
+      display_guess_prompt
       input = gets.chomp
     end
     input
@@ -124,7 +156,8 @@ class NewGame
     return unless former_blank == @blank_word
 
     @incorrect_guesses_left -= 1
-    p 'oops! wrong guess..'
+
+    display_wrong_guess
   end
 
   def play_game
@@ -133,11 +166,10 @@ class NewGame
       display_round_info(@blank_word, @incorrect_guesses_left, @attempted_guesses)
       input = gets.chomp
       if input == 'save'
-        puts 'game saved!'
-        # error, will loop and never prompt for guess...
+        display_save
+        return
       elsif input == 'exit'
-        # we want to trigger this loop somehow...
-        puts 'goodbye!'
+        display_exit
         return
       else
         valid_input = get_valid_char(input)
@@ -145,11 +177,12 @@ class NewGame
       end
 
       if player_won?(@blank_word, @word)
-        puts 'you win!'
+        display_win
         return
       end
+
     end
-    puts 'guess you lost :('
+    display_lose
   end
 end
 
