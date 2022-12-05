@@ -235,7 +235,6 @@ class NewGame
       display_round_info(@blank_word, @incorrect_guesses_left, @attempted_guesses)
       input = gets.chomp
       if input == 'save'
-        display_save
         save_game
         # exit_or_continue?
         return
