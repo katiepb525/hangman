@@ -101,6 +101,21 @@ class NewGame
     end
   end
 
+  # choose from the 3 most recent saves
+  def choose_load
+    display_load_prompt
+    puts @@save_files
+    @@chosen_save = gets.chomp
+    # check if chosen save if valid
+    until File.exist?("#{@@directory}#{@@chosen_save}")
+      puts "that save doesn\'t exist.
+      \nchoose another save."
+      @@chosen_save = gets.chomp
+    end
+    deserialize
+    play_game
+  end
+
   # load saved values into game
   def deserialize
     save = YAML.load(File.read("#{@@directory}#{@@file_name}"))
