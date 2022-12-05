@@ -92,9 +92,8 @@ class NewGame
       input = gets.chomp
       if input == 'L'
         # ask player to choose a save file
+        choose_load
         # start game with saved values
-        deserialize
-        play_game
       elsif input == 'N'
         play_game
       end
