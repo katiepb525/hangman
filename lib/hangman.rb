@@ -118,7 +118,7 @@ class NewGame
 
   # load saved values into game
   def deserialize
-    save = YAML.load(File.read("#{@@directory}#{@@file_name}"))
+    save = YAML.load(File.read("#{@@directory}#{@@chosen_save}"))
     @incorrect_guesses_left = save[:incorrect_guesses_left]
     @word = save[:word]
     @attempted_guesses = save[:attempted_guesses]
