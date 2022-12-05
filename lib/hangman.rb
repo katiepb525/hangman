@@ -43,6 +43,10 @@ module Display
   def display_wrong_guess
     puts 'oops! wrong guess..'
   end
+
+  def display_load_prompt
+    puts 'choose a recent file to load..'
+  end
 end
 
 # create instance of new game
