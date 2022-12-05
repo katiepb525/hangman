@@ -135,8 +135,32 @@ class NewGame
   end
 
   def save_game
-    # save yaml file to directory
-    File.open("#{@@directory}#{@@file_name}", 'w') { |file| file.write(to_yaml) }
+    puts 'chose a file to save to:'
+    puts @@save_files
+    @@chosen_save = gets.chomp
+
+    until @@save_files.include?(@@chosen_save)
+      puts 'please pick a valid save.'
+      @@chosen_save = gets.chomp
+    end
+    File.open("#{@@directory}#{@@chosen_save}", 'w') { |file| file.write(to_yaml) }
+    puts 'game saved.'
+    nil
+
+    # # check if chosen save if valid
+    # if File.exist?("#{@@directory}#{@@chosen_save}")
+    #   puts "would you like to overrwrite #{@@chosen_save?} y or n"
+    #   input = gets.chomp
+    #   if input = 'y'
+    #     # save yaml file to chosen save
+    #     File.open("#{@@directory}#{@@chosen_save}", 'w') { |file| file.write(to_yaml) }
+    #     puts "game saved."
+    #     return
+    #   end
+
+    # else
+
+    # end
   end
 
   def get_valid_char(input)
