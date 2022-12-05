@@ -57,7 +57,10 @@ class NewGame
 
   # save game directory/filename
   @@directory = 'saved_games/'
-  @@file_name = 'save_test.yml'
+  # array of different save file names
+  @@save_files = ['save_1.yml', 'save_2.yml', 'save_3.yml']
+  # save chosen by user
+  @@chosen_save = ''
 
   def initialize
     @incorrect_guesses_left = 10
